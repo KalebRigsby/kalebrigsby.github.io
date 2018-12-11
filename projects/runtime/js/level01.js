@@ -26,13 +26,14 @@ var level01 = function (window) {
         game.setDebugMode(true);
 
         // BEGIN EDITING YOUR CODE HERE
+   function createEnemy(x,y){
     var enemy = game.createGameItem('enemy', 25);
     var redSquare = draw.rect(50,50, "red");
     redSquare.x = -25;
     redSquare.y = -25;
     enemy.addChild(redSquare);
-    enemy.x = 400;
-    enemy.y = groundY-50;
+    enemy.x = x;
+    enemy.y = y;
     game.addGameItem(enemy);
     enemy.velocityX = -1;
     enemy.rotationalVelocity = 10;
@@ -43,7 +44,14 @@ var level01 = function (window) {
     enemy.onProjectileCollision = function(){
       console.log('Halle has hit an enemy');
       game.increaseScore(100);
+      enemy.fadeOut();
     };
+   
+   }
+   
+    createEnemy(600,groundY-10);
+    createEnemy(600,groundY-100);
+    createEnemy(500,groundY-50);
     
     
     for (var i=0; i < levelData.gameItems.length; i++) {
@@ -99,9 +107,29 @@ obstacleImage.y = -30;}
 
 createRock(150, 400);
 
+
+createEnemy(400,groundY-50)
+        createEnemy(500,groundY-125)
+        function createReward(x,y){
+            var enemy = game.createGameItem("enemy",25);
+            var blueSquare = draw.rect(50,50,"blue");
+            blueSquare.x = -25;
+           blueSquare.x = -25;
+            enemy.addChild(blueSquare);
+            enemy.x = x;
+            enemy.y = y;
+            game.addGameItem(enemy);
+            
+            enemy.velocityX = -1; 
+                enemy.onPlayerCollision = function (){
+                    console.log("The Reward gave Halle Points");
+                    game.increaseScore(100);
+                enemy.fadeOut();
+                }; 
+        }
+        createReward(900,groundY-100)
     };
 };
-
     
 
 // DON'T REMOVE THIS CODE //////////////////////////////////////////////////////
